@@ -9,5 +9,5 @@ def get_data(url):
 
 
 if __name__ == "__main__":
-    url_loerrach = "http://api.positionstack.com/v1/forward?access_key=af9acbe6bf967714ee3116cd205fb95a&query=Loerrach"
+    url_loerrach = "http://api.positionstack.com/v1/forward?access_key=xxxx&query=Loerrach"
     get_data(url_loerrach)
