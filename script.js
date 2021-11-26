@@ -1,11 +1,10 @@
 //API url festlegen
 const maps_url = "https://maps.googleapis.com/maps/api/distancematrix/json"
+const order_id = Date.now().toString(36) + Math.random().toString(36) //generate a uniqe Id for every order by using Date.now() and Math.random()
 //Konstanten von html dokument festlegen
-const order_id = document.getElementsByID('') //in html ergänzen
 const lieferung = document.getElementById('lieferung')
 const checkbox_input_menus = document.getElementById('checkbox_lieferung') 
 const search_input_lieferadresse = document.getElementById('lieferadresse') 
-const delivery_time_calculation = document.getElementById('') //in html ergänzen
 const total_price_calculation = document.getElementsByClassName('Preis')
 //Zubereitungszeit für die einzelnen Menüs festlegen
 const preparation_time_Asian_Fusion = 60
@@ -15,6 +14,7 @@ const preparationtime_European_Fusion = 70
 const preparationtime_Latin_Fusion = 30
 const preparationtime_Other_Fusion = 20
 
+const delivery_time_calculation = document.getElementById('') //in html ergänzen oder funktion bauen (API erforderlich!)
 
 
 function create_new_order(id,menus, price,adress, delivery_time) {
@@ -22,7 +22,7 @@ function create_new_order(id,menus, price,adress, delivery_time) {
     new_order.classList.add('section_delivery');
 
     new_order.innerHTML = `
-    <div class="order">${id}</div>
+    <div class="order">${order_id}</div>
       <div class="order_info">
         <span>
           <span class="menus">${menus}</span>
@@ -35,7 +35,7 @@ function create_new_order(id,menus, price,adress, delivery_time) {
   lieferung.appendChild(new_order);
 }
 function doSearch() {
-    const order_id = search_input.value;
+    const order_id = order_id.value;
     const ordered_menus = checkbox_input_menus.value;
     const total_price = total_price_calculation.value;
     const order_adress= search_input_lieferadresse.value;
@@ -44,10 +44,10 @@ function doSearch() {
   }
 
 async function loadData(api_key, destination, origin) {
-    const url = `${maps_url}?access_key=${api_key}&destinations=${destination}&origins=${origin}`;
+    const url = `${maps_url}?key=${api_key}&destinations=${destination}&origins=${origin}`;
     const data = await fetch(url);
     const json = await data.json()
-    return Math.trunc(json.elements[0].duration[0])
+    return console.log(json)
 }
 
-loadData("xxxx","Rotzingen 45 79733 Görwihl BW, DE", "Hangstraße 46-50 Loerach, 79539 BW, DE")
+loadData("xxx","Rotzingen 45 79733 Görwihl BW, DE", "Hangstraße 46-50 Loerach, 79539 BW, DE")

@@ -9,5 +9,5 @@ def get_data(url):
 
 
 if __name__ == "__main__":
-    url_loerrach = "http://api.positionstack.com/v1/forward?access_key=xxxx&destinations=Rotzingen45BW,DE&origins=Hangstraße46-50Loerach,79539BW,DE"
+    url_loerrach = "https://maps.googleapis.com/maps/api/distancematrix/json?key=xxx&destinations=Rotzingen 45 79733 Görwihl BW, DE&origins=Hangstraße 46-50 Loerach, 79539 BW, DE"
     get_data(url_loerrach)
