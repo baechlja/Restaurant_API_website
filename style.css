@@ -186,6 +186,22 @@ h2 {
     align-items:center;
 }
 
+.orders {
+    margin-top: 15px;
+    width: 1090px;
+    height: 10 px;
+    border: 1px solid maroon;
+    border-radius: 1px;
+    padding: 10px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+    text-justify: inter-word;
+    justify-content: left;
+    align-items:center;
+}
+
 .section-contact {
     margin-top: 130px;
     width: 1090px;
