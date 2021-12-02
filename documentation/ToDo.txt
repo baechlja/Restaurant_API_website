@@ -3,12 +3,13 @@ ToDo:
     -add transport mode option(car, bicycle, public transport)
 - java script:
     -build function to get the API
+        -how to return just the delivery time?
     -build function for "Reservierung"
         -save data in database (MongoDB)
     -build function for "Lieferung"
         -use API to get the transport time
         -add up preperation time and transport time and show it as total time
         -show search result
+            -how to show the checkbox values?
         -save data in database with sending the result
-    -build if clause for the prepation times
 

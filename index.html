@@ -174,27 +174,27 @@
       <div id="checkbox_lieferung">
         <label>
           Asian Fusion 
-          <input type="checkbox" checked="true"/>
+          <input id = "asian_check" class = "checked_menus" type="checkbox" checked="true"/>
       </label>
       <label>
           Arabic Fusion 
-          <input type="checkbox" checked="true"/>
+          <input id = "arabic_check" class = "checked_menus" type="checkbox" checked="true"/>
       </label>
         <label>
             African Fusion 
-            <input type="checkbox" checked="true"/>
+            <input id = "african_check" class = "checked_menus" type="checkbox" checked="true"/>
         </label>
         <label>
             European Fusion 
-            <input type="checkbox" checked="true"/>
+            <input id = "european_check" class = "checked_menus" type="checkbox" checked="true"/>
         </label>
         <label>
             Latin Fusion 
-            <input type="checkbox" checked="true"/>
+            <input id = "latin_check" class = "checked_menus" type="checkbox" checked="true"/>
         </label>
         <label>
             Other Fusion 
-            <input type="checkbox" checked="true"/>
+            <input id = "other_check" class = "checked_menus" type="checkbox" checked="true"/>
         </label>
       </div>
         <br/>
@@ -205,9 +205,16 @@
         <br/>
         <br/>
         <input type="text" placeholder="Sonderwüsche">
-        <button id = "view_button">Bestellung ansehen</button>
         <br/>
         <br/>
+        <div id= "bestellung" class = "bestellansicht">
+        <button id = "view_button" onclick= "showOrHideDiv(order)">Bestellung ansehen</button>
+        <div id = "order">
+
+        </div>
+        </div>
+        <br/>
+        
         <button>Bestellung abschicken</button>
       </h3>
     </div>
