@@ -1,3 +1,25 @@
+Anforderungen:
+·         Must-have
+o    Suchbegriffe eingeben
+·         Lieferzeit des Filters berechnen -- done
+·         Bestellung ansehen -- done
+o    Suche filtern
+·         Menu Filtern durch Checkbox (Jede Speise hat unterschiedliche Zubereitungszeiten) --checkbox erfassung klappt, if schleife noch nicht perfekt
+·         Lieferungsart Filtern durch Auswahlliste (Auswahl ob Lieferung per Auto, Fahrrad oder ÖV benutzt werden soll) --ToDo
+o    Asynchrone Suche im Hintergrund
+·         Lieferzeit berechnen --bis jetzt kommt noch ein Promise raus
+o    Erscheinung der Suchergebnisse 
+·         Bestellung ansehen -- html muss noch angepasst werden und richtige werte
+o     Ein und Ausblendung der Suchergebnisse
+·         Bestellung ansehen -- html muss noch angepasst werden und richtige werte
+
+
+·         Nice-to-have
+o    Speicherung der Datenbank
+·         Speicherung der Bestellungen
+·         Mit Mongo DB Cloud
+o    Responsive Design
+·         Black mode/White mode -- html muss noch angepasst werden
 ToDo:
 - html:
     -add transport mode option(car, bicycle, public transport)
@@ -13,3 +35,7 @@ ToDo:
             -how to show the checkbox values?
         -save data in database with sending the result
 
+Done:
+-html
+    -website structure
+    -needed must haves
