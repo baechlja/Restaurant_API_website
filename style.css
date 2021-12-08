@@ -186,20 +186,26 @@ h2 {
     align-items:center;
 }
 
+.order_input {
+    float: left;
+
+}
+
 .orders {
-    margin-top: 15px;
+    
     width: 1090px;
-    height: 10 px;
+    height: 1000 px;
     border: 1px solid maroon;
     border-radius: 1px;
     padding: 10px;
     background-color: whitesmoke;
-    display: flex;
+    display: inline-table;
     flex-direction: row;
     text-align: justify;
     text-justify: inter-word;
     justify-content: left;
     align-items:center;
+    float: right;
 }
 
 .section-contact {

@@ -5,37 +5,37 @@ const lieferung = document.getElementById('lieferung')
 //Die Ausgewählten Menus erfassen
 const ordered_menus = [];
 for (let i = 0; i < 6; i++) {
-  if (document.getElementById("asian_check").checked && ordered_menus.some(ordered_menus => ordered_menus.menu !== "Asian Fusion")) {
+  if (document.getElementById("asian_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Asian Fusion")) {
     ordered_menus.push({
       menu:   "Asian Fusion",
       prep_time: 60,
       price: 22
   })
-  } else if (document.getElementById("arabic_check").checked && ordered_menus.some(ordered_menus => ordered_menus.menu !== "Arabic Fusion")) {
+  } else if (document.getElementById("arabic_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Arabic Fusion"))  {
     ordered_menus.push({
       menu:   "Arabic Fusion",
       prep_time: 50,
       price: 18
   })
-  } else if (document.getElementById("african_check").checked && ordered_menus.some(ordered_menus => ordered_menus.menu !== "African Fusion")) {
+  } else if (document.getElementById("african_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "African Fusion")) {
     ordered_menus.push({
       menu:   "African Fusion",
       prep_time: 40,
       price: 20
   })
-  } else if (document.getElementById("latin_check").checked && ordered_menus.some(ordered_menus => ordered_menus.menu !== "Latin Fusion")) {
+  } else if (document.getElementById("latin_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Latin Fusion")) {
     ordered_menus.push({
       menu:   "Latin Fusion",
       prep_time: 30,
       price: 20
   })
-  } else if (document.getElementById("other_check").checked && ordered_menus.some(ordered_menus => ordered_menus.menu !== "Other Fusion")) {
+  } else if (document.getElementById("other_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Other Fusion")) {
     ordered_menus.push({
       menu:   "Other Fusion",
       prep_time: 20,
       price: 21
   })
-  } else if (document.getElementById("european_check").checked && ordered_menus.some(ordered_menus => ordered_menus.menu !== "European Fusion")) {
+  } else if (document.getElementById("european_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu !== "European Fusion")) {
     ordered_menus.push({
       menu:   "European Fusion",
       prep_time: 70,
@@ -89,6 +89,8 @@ async function create_new_order(id,menus, price,adress, delivery_time_total) {
     new_order.innerHTML = `
     <div class = "orders">
     <div class="order_id">Bestellnummer: ${id}</div>
+    </br>
+    </br>
       <div class="order_info">
         <span>
           <span class="menus">Menus: ${menus}</span>
