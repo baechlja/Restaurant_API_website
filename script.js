@@ -42,7 +42,11 @@ for (let i = 0; i < 6; i++) {
       price: 15
   })
   }else {
-    ordered_menus.push(" ")
+    ordered_menus.push({
+      menu:   "No Menu selected",
+      prep_time: 0,
+      price: 0
+  })
   }
 }
 
@@ -50,8 +54,20 @@ for (let i = 0; i < 6; i++) {
 //Die eigegebene Lieferadresse speichern  
 const search_input_lieferadresse = document.getElementById('lieferadresse')
 //ToDo:Preis anhand der Menus berechnen 
-//const total_price_calculation = document.getElementsByClassName('Preis')
-const total_price_calculation = 50
+
+
+
+//ordered_menus.sum = function(items, prop){
+  //return items.reduce( function(a, b){
+    //  return a + b[prop];
+  //}, 0);
+//};
+
+//const total_price_calculation = ordered_menus.sum(ordered_menus, "price");
+
+
+const total_price_calculation = ordered_menus.reduce((n, {price}) => n + price, 0)
+
 //Button zur Berechnung der Lieferzeit
 const calculate_button = document.getElementById('calculate_button')
 //Button zur Anzeige der Bestellung
@@ -90,12 +106,15 @@ async function create_new_order(id,menus, price,adress, delivery_time_total) {
     <div class = "orders">
     <div class="order_id">Bestellnummer: ${id}</div>
     </br>
-    </br>
       <div class="order_info">
         <span>
           <span class="menus">Menus: ${menus}</span>
+          </br>
+          </br>
           <span class="price"> Preis gesamt: ${price}</span>
+          </br>
           <span class="adresse">Adresse: ${adress}</span>
+          </br>
           <span class="lieferzeit">Lieferzeit: ${delivery_time_total}</span>
         </span>
     </div>
@@ -125,10 +144,8 @@ async function create_total_time(delivery_time_total) {
 
 function doSearch() {
     const order_id = Date.now().toString(36) + Math.random().toString(36);
-    const order_menus = JSON.stringify(ordered_menus, null, 2)
-    const total_price =  ordered_menus.reduce((sum, currentValue) => {
-     return sum + currentValue.price;
-   }, 0);
+    const order_menus = JSON.stringify(ordered_menus, null, 2);
+    const total_price =  total_price_calculation;
     const order_adress= search_input_lieferadresse.value;
     const order_delivery_time =  calculate_total_delivery_time (delivery_time)
     create_new_order(order_id, order_menus, total_price, order_adress, order_delivery_time);
