@@ -1,9 +1,12 @@
 //API url festlegen
 const maps_url = "https://maps.googleapis.com/maps/api/distancematrix/json"
+
 //Konstanten von html dokument festlegen
 const lieferung = document.getElementById('lieferung')
+
 //Die Ausgewählten Menus erfassen
 const ordered_menus = [];
+const no_menus_ordered = false
 for (let i = 0; i < 6; i++) {
   if (document.getElementById("asian_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Asian Fusion")) {
     ordered_menus.push({
@@ -42,63 +45,43 @@ for (let i = 0; i < 6; i++) {
       price: 15
   })
   }else {
-    ordered_menus.push({
-      menu:   "No Menu selected",
-      prep_time: 0,
-      price: 0
-  })
+    const no_menus_ordered = true
   }
-}
-
+  }
 
 //Die eigegebene Lieferadresse speichern  
 const search_input_lieferadresse = document.getElementById('lieferadresse')
-//ToDo:Preis anhand der Menus berechnen 
 
-
-
-//ordered_menus.sum = function(items, prop){
-  //return items.reduce( function(a, b){
-    //  return a + b[prop];
-  //}, 0);
-//};
-
-//const total_price_calculation = ordered_menus.sum(ordered_menus, "price");
-
-
+//Berechnung des Preises
 const total_price_calculation = ordered_menus.reduce((n, {price}) => n + price, 0)
+
+//Berechung der Zubereitungszeit
+const total_prep_time_calcualtion = ordered_menus.reduce((n, {prep_time}) => n + prep_time, 0)
 
 //Button zur Berechnung der Lieferzeit
 const calculate_button = document.getElementById('calculate_button')
+
 //Button zur Anzeige der Bestellung
 const view_button = document.getElementById('view_button')
-
-//Zubereitungszeit für die einzelnen Menüs festlegen
-const preperation_time = null
-//Lieferzeit festlegen 
-const delivery_time = null
 
 //API laden
 async function loadData(api_key, destination, origin) {
   const url = `${maps_url}?key=${api_key}&destinations=${destination}&origins=${origin}`;
   const data = await fetch(url);
   const json = await data.json()
-  const delivery_time =  45  //json["rows"][1]["duration"]["text"]
-  return delivery_time
+  //const delivery_time = json["rows"][1]["duration"]["text"]
+  return json
 }
 
 //calculate the total delivery_time
 async function calculate_total_delivery_time (){
-  //delivery_time = loadData("enter your api key here","Rotzingen 45 79733 Görwihl BW, DE", "Hangstraße 46-50 Loerach, 79539 BW, DE");
-  const preperation_time = ordered_menus.reduce((sum, currentValue) => {
-    return sum + currentValue.prep_time;
-  }, 0);
-  
-  const delivery_time_total = delivery_time + preperation_time
-  return delivery_time_total 
+  const delivery_time = loadData("enter your API key here","Rotzingen 45 79733 Görwihl BW, DE", "Hangstraße 46-50 Loerach, 79539 BW, DE");
+  //const delivery_time_total = delivery_time + preperation_time
+  return delivery_time
 }
 
-async function create_new_order(id,menus, price,adress, delivery_time_total) {
+//Die Bestellung in Html erstellen
+async function create_new_order(id,menus, price,adress, prep_time_total, delivery_time_total) {
     const new_order = document.createElement('div');
     new_order.classList.add('bestellansicht');
 
@@ -115,6 +98,8 @@ async function create_new_order(id,menus, price,adress, delivery_time_total) {
           </br>
           <span class="adresse">Adresse: ${adress}</span>
           </br>
+          <span class="zubereitungszeit"> Zubereitungszeit: ${prep_time_total}</span>
+          </br>
           <span class="lieferzeit">Lieferzeit: ${delivery_time_total}</span>
         </span>
     </div>
@@ -123,6 +108,7 @@ async function create_new_order(id,menus, price,adress, delivery_time_total) {
   `;
   lieferung.appendChild(new_order);
 }
+
 //eine Option erstellen die Bestellung ein- oder auszublenden
 function showOrHideDiv(div_id) {
   var v = document.getElementById(div_id);
@@ -132,6 +118,8 @@ function showOrHideDiv(div_id) {
      v.style.display = "none";
   }
 }
+
+//Die Lieferzeit in Html erstellen
 async function create_total_time(delivery_time_total) {
   const total_time = document.createElement('div');
   total_time.classList.add('section_delivery');
@@ -142,19 +130,23 @@ async function create_total_time(delivery_time_total) {
   lieferung.appendChild(total_time);
 }
 
+//Die Parameter für für die funktion create_new_order defninieren
 function doSearch() {
     const order_id = Date.now().toString(36) + Math.random().toString(36);
     const order_menus = JSON.stringify(ordered_menus, null, 2);
     const total_price =  total_price_calculation;
     const order_adress= search_input_lieferadresse.value;
-    const order_delivery_time =  calculate_total_delivery_time (delivery_time)
-    create_new_order(order_id, order_menus, total_price, order_adress, order_delivery_time);
+    const order_delivery_time =  calculate_total_delivery_time()
+    const preptime_total = total_prep_time_calcualtion;
+    create_new_order(order_id, order_menus, total_price, order_adress, preptime_total, order_delivery_time);
   };
 
+//Die Parameter für die Funktion create_total_time berechnen
 function doCalculation() {
   const delivery_time_total = calculate_total_delivery_time (delivery_time)
   create_total_time(delivery_time_total)
 }
 
+//Funktionen per Klick ausführen
 calculate_button.addEventListener('click', doCalculation)
 view_button.addEventListener('click', doSearch);
