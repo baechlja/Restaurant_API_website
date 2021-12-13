@@ -1,10 +1,6 @@
 //API url festlegen
 const maps_url = "https://maps.googleapis.com/maps/api/distancematrix/json";
 
-//API Parameter festlegen
-const Startort = "Hangstraße 46-50 Loerrach, 79539 BW, DE";
-const Zielort = "Rotzingen 45, Goerwihl 79733 BW, DE "
-
 //Konstanten von html dokument festlegen
 const lieferung = document.getElementById('lieferung');
 
@@ -56,6 +52,9 @@ for (let i = 0; i < 6; i++) {
 //Die eigegebene Lieferadresse speichern  
 const search_input_lieferadresse = document.getElementById('lieferadresse')
 
+//Die Adresse von Fusion Eat speichern
+const fusion_eat_adress = "Hangstraße 46-50 Loerrach, 79539 BW, DE";
+
 //Berechnung des Preises
 const total_price_calculation = ordered_menus.reduce((n, {price}) => n + price, 0)
 
@@ -68,7 +67,7 @@ const calculate_button = document.getElementById('calculate_button')
 //Button zur Anzeige der Bestellung
 const view_button = document.getElementById('view_button')
 
-//API laden
+//API laden - Async Methode
 async function loadData(api_key, destination, origin) {
   const url = `${maps_url}?key=${api_key}&destinations=${destination}&origins=${origin}`;
   const data = await fetch(url);
@@ -77,15 +76,33 @@ async function loadData(api_key, destination, origin) {
   console.log(json)
 }
 
-//calculate the total delivery_time
-async function calculate_total_delivery_time (){
-  const delivery_time =  await this.loadData("enter you API key here","Rotzingen 45 79733 Goerwihl BW, DE", "Hangstraße 46-50 Loerrach, 79539 BW, DE")
+//API laden - Normale fetch Methode verwenden
+  function fetchDistanceDetails(api_key, destination, origin) {
+    fetch (`${maps_url}?key=${api_key}&destinations=${destination}&origins=${origin}`)
+    .then (res => {
+        return res.json()
+    })
+     
+    .then (data => {
 
+        //update the variables with new data fetched from json
+
+        const startingAddress = data.origin_addresses[0] ;
+        const destinationAddress = data.destination_addresses[0];
+        const dataRowsArray = data.rows[0].elements[0];
+        const travelDistance = dataRowsArray.distance.text;
+        const travelTime = dataRowsArray.duration.text;  
+     });
+}
+//calculate the total delivery_time
+function calculate_total_delivery_time (){
+  //const delivery_time =  await this.loadData("enter you API key here","Rotzingen 45 79733 Goerwihl BW, DE", "Hangstraße 46-50 Loerrach, 79539 BW, DE")
+  const delivery_time = fetchDistanceDetails("ENTER YOUR API KEY HERE", search_input_lieferadresse.value, fusion_eat_adress)
   return delivery_time
 }
 
 //Die Bestellung in Html erstellen
-async function create_new_order(id,menus, price,adress, prep_time_total, delivery_time_total) {
+function create_new_order(id,menus, price,adress, prep_time_total, delivery_time_total) {
     const new_order = document.createElement('div');
     new_order.classList.add('bestellansicht');
 
@@ -124,7 +141,7 @@ function showOrHideDiv(div_id) {
 }
 
 //Die Lieferzeit in Html erstellen
-async function create_total_time(delivery_time_total) {
+async function create_total_time() {
   const total_time = document.createElement('div');
   total_time.classList.add('section_delivery');
 
@@ -140,14 +157,14 @@ function doSearch() {
     const order_menus = JSON.stringify(ordered_menus, null, 2);
     const total_price =  total_price_calculation;
     const order_adress= search_input_lieferadresse.value;
-    const order_delivery_time = calculate_total_delivery_time()
+    const order_delivery_time =  calculate_total_delivery_time();
     const preptime_total = total_prep_time_calcualtion;
     create_new_order(order_id, order_menus, total_price, order_adress, preptime_total, order_delivery_time);
   };
 
 //Die Parameter für die Funktion create_total_time berechnen
 function doCalculation() {
-  const delivery_time_total = calculate_total_delivery_time (delivery_time)
+  const delivery_time_total = calculate_total_delivery_time ()
   create_total_time(delivery_time_total)
 }
 
