@@ -32,7 +32,8 @@ ToDo:
         -use API to get the transport time
         -add up preperation time and transport time and show it as total time
         -show search result
-            -how to show the checkbox values?
+            -implement it in the delivery calculation
+            -make ordered menues pretty
         -save data in database with sending the result
 
 Done:

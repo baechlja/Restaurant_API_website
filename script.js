@@ -1,8 +1,12 @@
 //API url festlegen
-const maps_url = "https://maps.googleapis.com/maps/api/distancematrix/json"
+const maps_url = "https://maps.googleapis.com/maps/api/distancematrix/json";
+
+//API Parameter festlegen
+const Startort = "Hangstraße 46-50 Loerrach, 79539 BW, DE";
+const Zielort = "Rotzingen 45, Goerwihl 79733 BW, DE "
 
 //Konstanten von html dokument festlegen
-const lieferung = document.getElementById('lieferung')
+const lieferung = document.getElementById('lieferung');
 
 //Die Ausgewählten Menus erfassen
 const ordered_menus = [];
@@ -68,15 +72,15 @@ const view_button = document.getElementById('view_button')
 async function loadData(api_key, destination, origin) {
   const url = `${maps_url}?key=${api_key}&destinations=${destination}&origins=${origin}`;
   const data = await fetch(url);
-  const json = await data.json()
+  const json = await data.json();
   //const delivery_time = json["rows"][1]["duration"]["text"]
-  return json
+  console.log(json)
 }
 
 //calculate the total delivery_time
 async function calculate_total_delivery_time (){
-  const delivery_time = loadData("enter your API key here","Rotzingen 45 79733 Görwihl BW, DE", "Hangstraße 46-50 Loerach, 79539 BW, DE");
-  //const delivery_time_total = delivery_time + preperation_time
+  const delivery_time =  await this.loadData("enter you API key here","Rotzingen 45 79733 Goerwihl BW, DE", "Hangstraße 46-50 Loerrach, 79539 BW, DE")
+
   return delivery_time
 }
 
@@ -136,7 +140,7 @@ function doSearch() {
     const order_menus = JSON.stringify(ordered_menus, null, 2);
     const total_price =  total_price_calculation;
     const order_adress= search_input_lieferadresse.value;
-    const order_delivery_time =  calculate_total_delivery_time()
+    const order_delivery_time = calculate_total_delivery_time()
     const preptime_total = total_prep_time_calcualtion;
     create_new_order(order_id, order_menus, total_price, order_adress, preptime_total, order_delivery_time);
   };
