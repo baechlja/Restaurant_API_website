@@ -1,6 +1,3 @@
-//API url festlegen
-const maps_url = "https://maps.googleapis.com/maps/api/distancematrix/json";
-
 //Konstanten von html dokument festlegen
 const lieferung = document.getElementById('lieferung');
 
@@ -51,6 +48,7 @@ for (let i = 0; i < 6; i++) {
 
 //Die eigegebene Lieferadresse speichern  
 const search_input_lieferadresse = document.getElementById('lieferadresse')
+const zieladresse = "Rotzingen 45 79733 Görwihl"
 
 //Die Adresse von Fusion Eat speichern
 const fusion_eat_adress = "Hangstraße 46-50 Loerrach, 79539 BW, DE";
@@ -67,42 +65,63 @@ const calculate_button = document.getElementById('calculate_button')
 //Button zur Anzeige der Bestellung
 const view_button = document.getElementById('view_button')
 
-//API laden - Async Methode
+//API laden - Async Methode (don't work for Google APIs)
 async function loadData(api_key, destination, origin) {
   const url = `${maps_url}?key=${api_key}&destinations=${destination}&origins=${origin}`;
   const data = await fetch(url);
-  const json = await data.json();
-  //const delivery_time = json["rows"][1]["duration"]["text"]
-  console.log(json)
+  if (!url.ok) {
+    const message = `An error has occured: ${response.status}`;
+    throw new Error(message);
+  }
+  const json = await data.text();
+  const minutesToDestination = json.rows[0].elements[0].duration.value;
+  
 }
 
-//API laden - Normale fetch Methode verwenden
-  function fetchDistanceDetails(api_key, destination, origin) {
-    fetch (`${maps_url}?key=${api_key}&destinations=${destination}&origins=${origin}`)
-    .then (res => {
-        return res.json()
-    })
-     
-    .then (data => {
+//API laden- Google Methode
+const directionsService = new google.maps.DistanceMatrixService();
 
-        //update the variables with new data fetched from json
+function getDuration() {
 
-        const startingAddress = data.origin_addresses[0] ;
-        const destinationAddress = data.destination_addresses[0];
-        const dataRowsArray = data.rows[0].elements[0];
-        const travelDistance = dataRowsArray.distance.text;
-        const travelTime = dataRowsArray.duration.text;  
-     });
-}
-//calculate the total delivery_time
-function calculate_total_delivery_time (){
-  //const delivery_time =  await this.loadData("enter you API key here","Rotzingen 45 79733 Goerwihl BW, DE", "Hangstraße 46-50 Loerrach, 79539 BW, DE")
-  const delivery_time = fetchDistanceDetails("ENTER YOUR API KEY HERE", search_input_lieferadresse.value, fusion_eat_adress)
-  return delivery_time
-}
+  const option = {
+    origins: [`"${fusion_eat_adress}"`],
+    destinations: [`"${zieladresse}"`],
+    travelMode: "DRIVING",
+  };
 
+  directionsService.getDistanceMatrix(option, result); }
+
+  function result(response, status) {
+    if (status != "OK") {
+      const total_time = document.createElement('div');
+      total_time.classList.add('section_delivery');
+      total_time.innerHTML = `<div class="total_time">Something went wrong</div>`;
+      
+      lieferung.appendChild(total_time);
+      return;
+    } else {
+      // die Ergebnisse anhand des JSON Aufbaus sichern
+      let results = response.rows[0].elements;
+      let element = results[0];
+      const delivery_min = element.duration.text.replace(/\D/g,'') //Mit dieser Konstanten erhalten wir den Wert für die Auslieferungsdauer - da der Rückgabewerte eine Kombination aus Zahl und String ist, wird mit Regex alle Buchstaben entfehrnt
+      //Berechnung der insgesamten Lieferzeit mit Zubereitungszeit und Auslieferungsdauer
+      const total_delivery_time = total_prep_time_calcualtion + Number(delivery_min);
+
+      //Aufteilung in Stunden und Minuten zur schöneren Darstellung
+      const hours = Math.floor(total_delivery_time / 60);          
+      const minutes = total_delivery_time % 60;
+
+      //Das Ergebnis in Html darstellen
+      const total_time = document.createElement('div');
+      total_time.classList.add('section_delivery');
+      total_time.innerHTML = `<div id= "delivery_time" class="total_time"> Deine Bestellung wird in ${hours} Stunden und ${minutes} Minuten geliefert. </div>`;
+      
+      lieferung.appendChild(total_time);
+  }
+  }
+  
 //Die Bestellung in Html erstellen
-function create_new_order(id,menus, price,adress, prep_time_total, delivery_time_total) {
+function create_new_order(id,menus, price,adress, prep_time_total) {
     const new_order = document.createElement('div');
     new_order.classList.add('bestellansicht');
 
@@ -120,8 +139,6 @@ function create_new_order(id,menus, price,adress, prep_time_total, delivery_time
           <span class="adresse">Adresse: ${adress}</span>
           </br>
           <span class="zubereitungszeit"> Zubereitungszeit: ${prep_time_total}</span>
-          </br>
-          <span class="lieferzeit">Lieferzeit: ${delivery_time_total}</span>
         </span>
     </div>
     </div>
@@ -140,16 +157,7 @@ function showOrHideDiv(div_id) {
   }
 }
 
-//Die Lieferzeit in Html erstellen
-async function create_total_time() {
-  const total_time = document.createElement('div');
-  total_time.classList.add('section_delivery');
 
-    total_time.innerHTML = `
-    <div class="total_time">Lieferzeit: ${delivery_time_total}</div>
-  `;
-  lieferung.appendChild(total_time);
-}
 
 //Die Parameter für für die funktion create_new_order defninieren
 function doSearch() {
@@ -157,17 +165,12 @@ function doSearch() {
     const order_menus = JSON.stringify(ordered_menus, null, 2);
     const total_price =  total_price_calculation;
     const order_adress= search_input_lieferadresse.value;
-    const order_delivery_time =  calculate_total_delivery_time();
     const preptime_total = total_prep_time_calcualtion;
-    create_new_order(order_id, order_menus, total_price, order_adress, preptime_total, order_delivery_time);
+    create_new_order(order_id, order_menus, total_price, order_adress, preptime_total);
   };
 
-//Die Parameter für die Funktion create_total_time berechnen
-function doCalculation() {
-  const delivery_time_total = calculate_total_delivery_time ()
-  create_total_time(delivery_time_total)
-}
+
 
 //Funktionen per Klick ausführen
-calculate_button.addEventListener('click', doCalculation)
+calculate_button.addEventListener('click', getDuration)
 view_button.addEventListener('click', doSearch);
