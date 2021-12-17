@@ -35,7 +35,7 @@ for (let i = 0; i < 6; i++) {
       prep_time: 20,
       price: 21
   })
-  } else if (document.getElementById("european_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu !== "European Fusion")) {
+  } else if (document.getElementById("european_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "European Fusion")) {
     ordered_menus.push({
       menu:   "European Fusion",
       prep_time: 70,
@@ -85,7 +85,7 @@ function getDuration() {
 
   const option = {
     origins: [`"${fusion_eat_adress}"`],
-    destinations: [`"${zieladresse}"`],
+    destinations: [`"${search_input_lieferadresse.value}"`],
     travelMode: "DRIVING",
   };
 
@@ -155,17 +155,15 @@ function showOrHideDiv(div_id) {
   } else {
      v.style.display = "none";
   }
-}
-
-
+} 
 
 //Die Parameter für für die funktion create_new_order defninieren
 function doSearch() {
     const order_id = Date.now().toString(36) + Math.random().toString(36);
-    const order_menus = JSON.stringify(ordered_menus, null, 2);
-    const total_price =  total_price_calculation;
+    const order_menus = JSON.stringify(ordered_menus, null, 2).replace(/[^a-zA-Z ]/g, "").split("menu").join("").split("preptime").join("|").split("price").join("")
+    const total_price =  total_price_calculation + " €";
     const order_adress= search_input_lieferadresse.value;
-    const preptime_total = total_prep_time_calcualtion;
+    const preptime_total = total_prep_time_calcualtion + " Minuten";
     create_new_order(order_id, order_menus, total_price, order_adress, preptime_total);
   };
 
@@ -174,3 +172,4 @@ function doSearch() {
 //Funktionen per Klick ausführen
 calculate_button.addEventListener('click', getDuration)
 view_button.addEventListener('click', doSearch);
+view_button.addEventListener('click', showOrHideDiv("orders"));
