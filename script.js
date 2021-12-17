@@ -65,6 +65,9 @@ const calculate_button = document.getElementById('calculate_button')
 //Button zur Anzeige der Bestellung
 const view_button = document.getElementById('view_button')
 
+//Button zum Abschicken der Bestellung
+const send_button = document.getElementById('send_button')
+
 //API laden - Async Methode (don't work for Google APIs)
 async function loadData(api_key, destination, origin) {
   const url = `${maps_url}?key=${api_key}&destinations=${destination}&origins=${origin}`;
@@ -126,7 +129,7 @@ function create_new_order(id,menus, price,adress, prep_time_total) {
     new_order.classList.add('bestellansicht');
 
     new_order.innerHTML = `
-    <div class = "orders">
+    <div id = "orders" class = "orders">
     <div class="order_id">Bestellnummer: ${id}</div>
     </br>
       <div class="order_info">
@@ -147,9 +150,12 @@ function create_new_order(id,menus, price,adress, prep_time_total) {
   lieferung.appendChild(new_order);
 }
 
+//Hide Button erfassen
+const hide_button = document.getElementById("hide_button")
+
 //eine Option erstellen die Bestellung ein- oder auszublenden
-function showOrHideDiv(div_id) {
-  var v = document.getElementById(div_id);
+function showOrHideDiv() {
+  var v = document.getElementById('orders');
   if (v.style.display === "none") {
      v.style.display = "block";
   } else {
@@ -157,10 +163,16 @@ function showOrHideDiv(div_id) {
   }
 } 
 
+//Funktion zur Benachrichtigung, dass die Bestellung versendet wurde
+function send_alert () {
+  alert("Ihre Bestellung wurde erfolgreich zugestellt. Vielen Dank und Guten Appetitt!")
+}
+
+
 //Die Parameter für für die funktion create_new_order defninieren
 function doSearch() {
     const order_id = Date.now().toString(36) + Math.random().toString(36);
-    const order_menus = JSON.stringify(ordered_menus, null, 2).replace(/[^a-zA-Z ]/g, "").split("menu").join("").split("preptime").join("|").split("price").join("")
+    const order_menus = JSON.stringify(ordered_menus, null, 2).replace(/[^a-zA-Z ]/g, "").split("menu").join("").split("preptime").join("|").split("price").join("") //make Menus pretty
     const total_price =  total_price_calculation + " €";
     const order_adress= search_input_lieferadresse.value;
     const preptime_total = total_prep_time_calcualtion + " Minuten";
@@ -170,6 +182,7 @@ function doSearch() {
 
 
 //Funktionen per Klick ausführen
-calculate_button.addEventListener('click', getDuration)
-view_button.addEventListener('click', doSearch);
-view_button.addEventListener('click', showOrHideDiv("orders"));
+calculate_button.addEventListener('click', getDuration); //Berechnung der Lieferzeit
+view_button.addEventListener('click', doSearch); //Bestellung anzeigen
+hide_button.addEventListener('click', showOrHideDiv) //Bestellung ausblenden
+send_button.addEventListener('click', send_alert)
