@@ -148,19 +148,21 @@ function create_new_order(id,menus, price,adress, prep_time_total) {
     
   `;
   lieferung.appendChild(new_order);
+  
 }
 
 //Hide Button erfassen
 const hide_button = document.getElementById("hide_button")
 
 //eine Option erstellen die Bestellung ein- oder auszublenden
-function showOrHideDiv() {
+function HideDiv() {
   var v = document.getElementById('orders');
   if (v.style.display === "none") {
      v.style.display = "block";
   } else {
      v.style.display = "none";
   }
+  window.location.reload() //load the page new to enable to create new orders
 } 
 
 //Funktion zur Benachrichtigung, dass die Bestellung versendet wurde
@@ -184,5 +186,5 @@ function doSearch() {
 //Funktionen per Klick ausführen
 calculate_button.addEventListener('click', getDuration); //Berechnung der Lieferzeit
 view_button.addEventListener('click', doSearch); //Bestellung anzeigen
-hide_button.addEventListener('click', showOrHideDiv) //Bestellung ausblenden
+hide_button.addEventListener('click', HideDiv) //Bestellung ausblenden
 send_button.addEventListener('click', send_alert)
