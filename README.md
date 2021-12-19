@@ -1,6 +1,6 @@
 # Restaurant_API_website
 
-Festures:
+Features:
 
 
 **Must-have**
