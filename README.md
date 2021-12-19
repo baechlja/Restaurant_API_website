@@ -40,7 +40,7 @@ Gehen Sie wie folgt vor:
 
 cd desktop (Oder Lokal Folder Path)
 <br>
-cd Restaurant_API_website (Folder Name)
+cd RestaurantProject (Folder Name)
 <br>
 npm init (weiter clicken default setting bis "yes" sehen, dann "yes" clicken)
 <br>
