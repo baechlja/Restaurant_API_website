@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- Responsive Web Design 1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>JASI&MELI</title>
+    <!-- Responsive Web Design 2 -->
+    <button onclick="changeMode()">Changemode</button> 
+
+
+    <!-- CSS Stylesheet connection -->
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+
+  <body>
+
+    <!-- navbar  -->
+    <nav>
+      <ul class="nav-flex-row">
+          <li class="nav-item">
+              <a href="#überuns">Über Uns</a>
+          </li>
+          <li class="nav-item">
+              <a href="#karte">Karte</a>
+          </li>
+          <li class="nav-item">
+              <a href="#reservierung">Reservierung</a>
+          </li>
+          <li class="nav-item">
+              <a href="#lieferung">Lieferung</a>
+          </li>
+          <li class="nav-item">
+            <a href="#kontakt">Kontakt</a>
+        </li>
+      </ul>
+  </nav>
+  <br/>
+      <h1>Fusion-Eat</h1>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+        <h2> Lust auf Fusionküche?  Dann ist hier der richtige Ort!</h2>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+    <!-- intro section -->
+    <section class="section-aboutus">
+      <div id="überuns"></div>
+      <article>
+          <h3>
+              Willkommen bei Fusion-Eat!
+              <br/>
+              <br/>
+              Wir kochen und servieren mit grosser Leidenschaft und Liebe regionale, 
+              nationale und internationale fine fusion Produkte 
+              und arbeiten wenn immer möglich nach dem "nose to tail" Prinzip. 
+              <br/>
+              <br/>
+              !!Wir empfehlen Ihnen, einen Tisch im Voraus zu reservieren oder unseren Lieferservice zu genießen! !
+          </h3>
+      </article>
+      </section>
+      <br/>
+      <br/>
+
+    <!-- menu section -->
+    <section class="section-menu">
+      <div id="karte"></div>
+
+      <div class="menu_list1">
+        <div class="kitchen_type">
+          <div class="kitchen_name">Asian Fusion</div>  
+          <div class="kitchen_pic"><img src="images/Asian Fusion.png" alt="Asian" width="400" height=400" style="position:relative;"></div>
+          <div class="kitchen_info">  
+              <span class="Preis">22 EURO</span> 
+              <span class="condition">Koreanisch & Chinesisch</span>
+            </span>       
+            <img src="images/fire-line.png" alt="hot"/><img src="images/fire-line.png" alt="hot"/><img src="images/fire-line.png" alt="hot"/>
+          </div>
+        </div>
+    
+        <div class="kitchen_type">
+          <div class="kitchen_name">Arabic Fusion</div>  
+          <div class="kitchen_pic"><img src="images/Arabic Fusion.png" alt="Arabic" width="400" height="400" style="position: relative;"></div>
+          <div class="kitchen_info">  
+              <span class="Preis">18 EURO</span> 
+              <span class="condition">Libanesisch & Persisch</span>
+            </span>       
+            <img src="images/fire-line.png" alt="spicy"/><img src="images/fire-line.png" alt="spicy"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu_list2">
+        <div class="kitchen_type">
+          <div class="kitchen_name">African Fusion</div>
+          <div class="kitchen_pic"><img src="images/African Fusion.png" alt="African" width="400" height="400" style="position:relative;"></div>  
+          <div class="kitchen_info">  
+              <span class="Preis">20 EURO</span> 
+              <span class="condition">Kenianisch & Algerisch</span>
+            </span>       
+            <img src="images/fire-line.png" alt="spicy"/>
+          </div>
+        </div>
+
+        <div class="kitchen_type">
+          <div class="kitchen_name">European Fusion</div>  
+          <div class="kitchen_pic"><img src="images/European Fusion.png" alt="European" width="400" height="400" style="position: relative;"></div>
+          <div class="kitchen_info">  
+              <span class="Preis">15 EURO</span> 
+              <span class="condition">Spanisch & Polnisch</span>
+            </span>       
+            <img src="images/fire-line.png" alt="spicy"/><img src="images/fire-line.png" alt="spicy"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu_list3">
+        <div class="kitchen_type">
+          <div class="kitchen_name">Latin Fusion</div> 
+          <div class="kitchen_pic"><img src="images/Latin Fusion.png" alt="Latin" width="400" height="400" style="position: relative;"></div> 
+          <div class="kitchen_info">  
+              <span class="Preis">20 EURO</span> 
+              <span class="condition">Peruanisch & Brasilianisch</span>
+            </span>       
+            <img src="images/fire-line.png" alt="mild"/>
+          </div>
+        </div>
+
+        <div class="kitchen_type">
+          <div class="kitchen_name">Other Fusion</div>
+          <div class="kitchen_pic"><img src="images/Other Fusion.png" alt="Other" width="400" height="400" style="position: relative;"></div>  
+          <div class="kitchen_info">  
+              <span class="Preis">21 EURO</span> 
+              <span class="condition">Malaysisch & Deutsch</span>
+            </span>       
+            <img src="images/fire-line.png" alt="spicy"/>
+          </div>
+        </div>
+      </div>
+  </section>
+
+      
+    <!-- reservation section -->
+    <section class="section-reservation">
+      <div id="reservierung"></div>
+      <div class="reservierung-order">
+        <h3>
+          Reservierung
+        </h3>      
+<p>
+            <span>Bitte hinterlassen Sie Ihre Nummer, wir rufen Sie an, um eine Reservierung vorzunehmen.</span>
+        </p>
+        <form class="container" method = "post" action="/">
+          <div class = "form-group">
+            <input class = "form-control" name = "customername"  type="name" placeholder="Name eingeben"/>
+            <br/>
+            <br/>
+            <input class = "form-control" name = "reservetime" type="datetime-local" value="2021-11-011T19:30" placeholder="Reservierungszeit eingeben"/>
+            <br/>
+            <br/>
+            <input class = "form-control" name = "tel" type="tel_numer" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" placeholder="Rufnummer eingeben"/>
+            <br/> 
+            <br/> 
+            <button>Info Abschicken</button>
+        </div>
+      </div>
+    </section>
+
+
+  
+
+    <!-- lieferung section -->
+    <section class="section-delivery">
+      <div id="lieferung"></div>
+      <div class="lieferung-order">
+        <h3>
+          Lieferung
+        </h3>
+          <br/>
+      <div id="checkbox_lieferung">
+        <label>
+          Asian Fusion 
+          <input id = "asian_check" class = "checked_menus" type="checkbox" checked="true"/>
+      </label>
+      <label>
+          Arabic Fusion 
+          <input id = "arabic_check" class = "checked_menus" type="checkbox" checked="true"/>
+      </label>
+        <label>
+            African Fusion 
+            <input id = "african_check" class = "checked_menus" type="checkbox" checked="true"/>
+        </label>
+        <label>
+            European Fusion 
+            <input id = "european_check" class = "checked_menus" type="checkbox" checked="true"/>
+        </label>
+        <label>
+            Latin Fusion 
+            <input id = "latin_check" class = "checked_menus" type="checkbox" checked="true"/>
+        </label>
+        <label>
+            Other Fusion 
+            <input id = "other_check" class = "checked_menus" type="checkbox" checked="true"/>
+        </label>
+      </div>
+        <br/>
+        <br/>
+        <input id = "lieferadresse"type="text" placeholder="Lieferadresse eingeben"/>
+      <!--Geben die aktuelle Uhrzeit oder die Zeit für eine zukünftige Bestellung an, berechnen die Lieferungsankommenzeit anhand der Fahrenzeit plus der Kochzeit-->
+        <input id="order_time"type="datetime-local" name="order_time" value="2021-11-011T19:30" placeholder="Lieferzeit eingeben"/>
+        <button id = "calculate_button">Lieferzeit berechnen</button>
+        <br/>
+        <br/>
+        <input type="text" placeholder="Sonderwüsche">
+        <br/>
+        <br/>
+        <div id= "bestellung" class = "bestellansicht">
+        <button id = "view_button" onclick= "showOrHideDiv(order)">Bestellung ansehen</button>
+        <br/>
+        <br/>
+        </div>
+        <button>Bestellung abschicken</button>
+      </h3>
+    </div>
+    </section>
+
+    <!-- contact section -->
+    <section class="section-contact">
+      <div id="kontakt"></div>
+      <div class="opening-time">
+        <h3>
+          Öffnungszeiten
+        </h3>
+         
+<p>
+            <span>Montag—Donnerstag: 11:00 — 22:00</span>
+            <br/>
+            <span>Freitag—Sonntag: 11:00 — 23:00 </span>
+        </p>
+        <br/>  
+        <div class="contact-address">
+          <h3>
+              Kontakt
+          </h3>     
+<p>
+              <span>Tel: 0049-25-521-8888</span>
+              <br/>
+              <span>Adr: Hangstraße 46-50</span>
+              <span>Loerach, 79539 BW, DE</span>
+          </p>
+
+      </div>
+      </div>
+      </section>
+
+  
+      <script src="script.js"></script>
+    </body>
+  </html>

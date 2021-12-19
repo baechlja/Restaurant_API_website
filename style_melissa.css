@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css?family=Big+Shoulders+Text:100, 300, 400, 500, 600, 700, 800, 900&display=swap');
+
+
+body{
+    font-style:normal;
+    background-color: none;
+    background-image: url(images/BG1.jpg);
+    background-size: 1200pt;
+    vertical-align: 50%;
+    margin: Zem;
+    margin-left: 10%; 
+}  
+/* toggle dark/light mode */
+.change-mode {
+    background-image: url(images/BG2.jpg);
+    color: rgb(251,147,9);
+    }
+
+    
+
+
+h1 {
+    font-size: bold,xx-large;
+    font-family: fantasy;
+    color:rgba(126, 6, 12, 0.856);
+    text-decoration:blink;
+    text-transform: uppercase
+}
+
+h2 {
+    text-align: center;
+    font-size: bold,xx-large;
+    font-style:bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:black;
+    text-decoration:none;
+    line-height: 200%; 
+}
+
+
+button{
+    cursor: pointer;
+    border: 1px solid #555;
+    text-align: center;
+    padding: 5px;
+    margin-left: 8px;
+}
+.dark{
+    background-color: #222;
+    color: #e6e6e6;
+}
+
+/* navi section */
+ 
+.nav-flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    width: 100%;
+    padding: 0;
+}
+ 
+.nav-flex-row li {
+    text-decoration: none;
+    list-style-type: none;
+    padding: 20px 15px;
+}
+ 
+.nav-flex-row li a {
+    font-family: 'Big Shoulders Text', cursive;
+    color: #000;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+.nav-flex-row li a:hover{
+    background: whitesmoke(0, 0%, 5%);
+}
+
+
+/* intro section */
+
+.section-aboutus {
+    border:1px solid maroon;
+    box-decoration-break: slice;
+    display: inline-block;
+    align-items: center;
+    background-color:whitesmoke;
+    padding: 30px 10px;
+    margin-bottom: 555px;
+    margin: 100pt;
+}
+ 
+.section-aboutus h3 {
+    text-align: center;
+    font-size: bold,xx-large;
+    font-style: oblique;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:black;
+    text-decoration:none;
+    line-height: 200%; 
+}
+
+
+/* menu section */
+
+.menu_list1{
+    margin-top: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    vertical-align: text-top;
+}
+
+.menu_list2{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    vertical-align: text-top;
+}
+
+.menu_list3{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    vertical-align: text-top;
+}
+
+.kitchen_type{
+    width: 450px;
+    height: 450px;
+    border: 1px solid maroon;
+    border-radius: 1px;
+    padding: 80px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    margin-right: 30px;
+    background-color: whitesmoke;
+}   
+
+
+.kitchen_pic{
+    object-position: center;
+    padding: 20px;
+} 
+.kitchen_name{
+    padding: 0.1px;
+    flex-wrap: wrap;
+    color:maroon;
+    font-size: 2em;
+    font-weight: bold;
+}  
+
+.kitchen_info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Preis{
+    color:black;
+    font:bolder;
+    font-weight: 900;
+}   
+.condition{
+    font-style: bold;
+    color: rgb(9, 50, 163);
+}   
+
+ 
+.section-reservation {
+    margin-top: 135px;
+    width: 1090px;
+    height: 110px;
+    border: 1px solid maroon;
+    border-radius: 1px;
+    padding: 80px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+    text-justify: inter-word;
+    justify-content: left;
+    align-items:center;
+}
+
+
+.section-delivery {
+    margin-top: 135px;
+    width: 1090px;
+    height: 150px;
+    border: 1px solid maroon;
+    border-radius: 1px;
+    padding: 80px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+    text-justify: inter-word;
+    justify-content: left;
+    align-items:center;
+}
+
+.orders {
+    margin-top: 15px;
+    width: 1090px;
+    height: 10 px;
+    border: 1px solid maroon;
+    border-radius: 1px;
+    padding: 10px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+    text-justify: inter-word;
+    justify-content: left;
+    align-items:center;
+}
+
+.section-contact {
+    margin-top: 130px;
+    width: 1090px;
+    height: 100px;
+    border: 1px solid maroon;
+    border-radius: 1px;
+    padding: 80px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+    justify-content: left;
+    align-items:center;
+    text-align: start;
+    font-size: bolder;
+    font-style: bolder;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:black;
+    text-decoration:none;
+    }
+
+
