@@ -59,7 +59,7 @@ cd desktop
 cd html-mongo 
 npm init
 npm i express mongoose body-parser
-npx nodemon server.js
+npx nodemon server_mongoDB.js
 
 2. http://localhost:3000/ öffen 
 Bestellung eingeben und abschicken 
