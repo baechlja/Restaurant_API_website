@@ -38,11 +38,11 @@ Gehen Sie wie folgt vor:
 
 1. Kommando in Terminal eingeben
 
-cd desktop (Oder lokal ordner path)
+cd desktop (Oder Lokal Folder Path)
 <br>
-cd RestaurantProject
+cd Restaurant_API_website (Folder Name)
 <br>
-npm init
+npm init (weiter clicken default setting bis "yes" sehen, dann "yes" clicken)
 <br>
 npm i express mongoose body-parser
 <br>
