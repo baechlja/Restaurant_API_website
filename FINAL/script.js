@@ -1,63 +1,70 @@
 //Konstanten von html dokument festlegen
 const lieferung = document.getElementById('lieferung');
 
-//Die Ausgewählten Menus erfassen
+//Checkboxen von html dokument festlegen
+const asian_checkbox = document.getElementById("asian_check");
+const arabic_checkbox = document.getElementById("arabic_check");
+const african_checkbox = document.getElementById("african_check");
+const latin_checkbox = document.getElementById("latin_check");
+const european_checkbox = document.getElementById("european_check");
+const other_checkbox =  document.getElementById("other_check");
+
+
 const ordered_menus = [];
-const no_menus_ordered = false
-for (let i = 0; i < 6; i++) {
-  if (document.getElementById("asian_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Asian Fusion")) {
-    ordered_menus.push({
-      menu:   "Asian Fusion",
-      prep_time: 60,
-      price: 22
-  })
-  } else if (document.getElementById("arabic_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Arabic Fusion"))  {
-    ordered_menus.push({
-      menu:   "Arabic Fusion",
-      prep_time: 50,
-      price: 18
-  })
-  } else if (document.getElementById("african_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "African Fusion")) {
-    ordered_menus.push({
-      menu:   "African Fusion",
-      prep_time: 40,
-      price: 20
-  })
-  } else if (document.getElementById("latin_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Latin Fusion")) {
-    ordered_menus.push({
-      menu:   "Latin Fusion",
-      prep_time: 30,
-      price: 20
-  })
-  } else if (document.getElementById("other_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Other Fusion")) {
-    ordered_menus.push({
-      menu:   "Other Fusion",
-      prep_time: 20,
-      price: 21
-  })
-  } else if (document.getElementById("european_check").checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "European Fusion")) {
-    ordered_menus.push({
-      menu:   "European Fusion",
-      prep_time: 70,
-      price: 15
-  })
-  }else {
-    const no_menus_ordered = true
-  }
-  }
+const no_menus_ordered = false;
+
+//Die Ausgewählten Menus erfassen
+function get_menus () {
+  for (let i = 0; i < 6; i++) {
+    if (asian_checkbox.checked  && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Asian Fusion")) {
+      ordered_menus.push({
+        menu:   "Asian Fusion",
+        prep_time: 60,
+        price: 22
+    })
+    } else if (arabic_checkbox.checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Arabic Fusion"))  {
+      ordered_menus.push({
+        menu:   "Arabic Fusion",
+        prep_time: 50,
+        price: 18
+    })
+    } else if (african_checkbox.checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "African Fusion")) {
+      ordered_menus.push({
+        menu:   "African Fusion",
+        prep_time: 40,
+        price: 20
+    })
+    } else if (latin_checkbox.checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Latin Fusion")) {
+      ordered_menus.push({
+        menu:   "Latin Fusion",
+        prep_time: 30,
+        price: 20
+    })
+    } else if (other_checkbox.checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "Other Fusion")) {
+      ordered_menus.push({
+        menu:   "Other Fusion",
+        prep_time: 20,
+        price: 21
+    })
+    } else if (european_checkbox.checked && !ordered_menus.some(ordered_menus => ordered_menus.menu == "European Fusion")) {
+      ordered_menus.push({
+        menu:   "European Fusion",
+        prep_time: 70,
+        price: 15
+    })
+    }else {
+      const no_menus_ordered = true
+    }
+    }
+    return ordered_menus
+  };
 
 //Die eigegebene Lieferadresse speichern  
 const search_input_lieferadresse = document.getElementById('lieferadresse')
-const zieladresse = "Rotzingen 45 79733 Görwihl"
 
 //Die Adresse von Fusion Eat speichern
 const fusion_eat_adress = "Hangstraße 46-50 Loerrach, 79539 BW, DE";
 
-//Berechnung des Preises
-const total_price_calculation = ordered_menus.reduce((n, {price}) => n + price, 0)
-
-//Berechung der Zubereitungszeit
-const total_prep_time_calcualtion = ordered_menus.reduce((n, {prep_time}) => n + prep_time, 0)
 
 //Button zur Berechnung der Lieferzeit
 const calculate_button = document.getElementById('calculate_button')
@@ -108,7 +115,7 @@ function getDuration() {
       let element = results[0];
       const delivery_min = element.duration.text.replace(/\D/g,'') //Mit dieser Konstanten erhalten wir den Wert für die Auslieferungsdauer - da der Rückgabewerte eine Kombination aus Zahl und String ist, wird mit Regex alle Buchstaben entfehrnt
       //Berechnung der insgesamten Lieferzeit mit Zubereitungszeit und Auslieferungsdauer
-      const total_delivery_time = total_prep_time_calcualtion + Number(delivery_min);
+      const total_delivery_time = ordered_menus.reduce((n, {prep_time}) => n + prep_time, 0) + Number(delivery_min);
 
       //Aufteilung in Stunden und Minuten zur schöneren Darstellung
       const hours = Math.floor(total_delivery_time / 60);          
@@ -155,7 +162,7 @@ function create_new_order(id,menus, price,adress, prep_time_total) {
 const hide_button = document.getElementById("hide_button")
 
 //eine Option erstellen die Bestellung ein- oder auszublenden
-function HideDiv() {
+function HideDiv(div_id) {
   var v = document.getElementById('orders');
   if (v.style.display === "none") {
      v.style.display = "block";
@@ -164,6 +171,12 @@ function HideDiv() {
   }
   window.location.reload() //load the page new to enable to create new orders
 } 
+
+//Change Mode (Dark or white)
+function changeMode() {
+  var element = document.body;
+  element.classList.toggle("change-mode");
+  }
 
 //Funktion zur Benachrichtigung, dass die Bestellung versendet wurde
 function send_alert () {
@@ -175,16 +188,18 @@ function send_alert () {
 function doSearch() {
     const order_id = Date.now().toString(36) + Math.random().toString(36);
     const order_menus = JSON.stringify(ordered_menus, null, 2).replace(/[^a-zA-Z ]/g, "").split("menu").join("").split("preptime").join("|").split("price").join("") //make Menus pretty
-    const total_price =  total_price_calculation + " €";
+    const total_price =  ordered_menus.reduce((n, {price}) => n + price, 0) + " €";
     const order_adress= search_input_lieferadresse.value;
-    const preptime_total = total_prep_time_calcualtion + " Minuten";
+    const preptime_total = ordered_menus.reduce((n, {prep_time}) => n + prep_time, 0) + " Minuten";
     create_new_order(order_id, order_menus, total_price, order_adress, preptime_total);
   };
 
 
 
 //Funktionen per Klick ausführen
+calculate_button.addEventListener('click', get_menus); //Menus erfassen
 calculate_button.addEventListener('click', getDuration); //Berechnung der Lieferzeit
+view_button.addEventListener('click', get_menus); //Menus erfassen
 view_button.addEventListener('click', doSearch); //Bestellung anzeigen
 hide_button.addEventListener('click', HideDiv) //Bestellung ausblenden
-send_button.addEventListener('click', send_alert)
+send_button.addEventListener('click', send_alert) //Bestellung absenden
