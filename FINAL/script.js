@@ -9,7 +9,13 @@ const latin_checkbox = document.getElementById("latin_check");
 const european_checkbox = document.getElementById("european_check");
 const other_checkbox =  document.getElementById("other_check");
 
+//Dropdownwerte erfassen
+const dropdown = document.getElementById("trasport_modes");
+const driving_mode =document.getElementById("drive_mode");
+const walking_mode =document.getElementById("walk_mode");
+const bicycle_mode =document.getElementById("bicycle_mode");
 
+//Menus efassen
 const ordered_menus = [];
 const no_menus_ordered = false;
 
@@ -65,7 +71,8 @@ const search_input_lieferadresse = document.getElementById('lieferadresse')
 //Die Adresse von Fusion Eat speichern
 const fusion_eat_adress = "Hangstraße 46-50 Loerrach, 79539 BW, DE";
 
-
+// Sonderwunsch erfassen
+const specail_wishes = document.getElementById("wish")
 //Button zur Berechnung der Lieferzeit
 const calculate_button = document.getElementById('calculate_button')
 
@@ -96,7 +103,7 @@ function getDuration() {
   const option = {
     origins: [`"${fusion_eat_adress}"`],
     destinations: [`"${search_input_lieferadresse.value}"`],
-    travelMode: "DRIVING",
+    travelMode: `${dropdown.value}`,
   };
 
   directionsService.getDistanceMatrix(option, result); }
@@ -131,7 +138,7 @@ function getDuration() {
   }
   
 //Die Bestellung in Html erstellen
-function create_new_order(id,menus, price,adress, prep_time_total) {
+function create_new_order(id,menus, price,adress,wish, prep_time_total) {
     const new_order = document.createElement('div');
     new_order.classList.add('bestellansicht');
 
@@ -147,6 +154,8 @@ function create_new_order(id,menus, price,adress, prep_time_total) {
           <span class="price"> Preis gesamt: ${price}</span>
           </br>
           <span class="adresse">Adresse: ${adress}</span>
+          </br>
+          <span class="adresse">Sonderwunsch: ${wish}</span>
           </br>
           <span class="zubereitungszeit"> Zubereitungszeit: ${prep_time_total}</span>
         </span>
@@ -190,8 +199,9 @@ function doSearch() {
     const order_menus = JSON.stringify(ordered_menus, null, 2).replace(/[^a-zA-Z ]/g, "").split("menu").join("").split("preptime").join("|").split("price").join("") //make Menus pretty
     const total_price =  ordered_menus.reduce((n, {price}) => n + price, 0) + " €";
     const order_adress= search_input_lieferadresse.value;
+    const special_wish = specail_wishes.value;
     const preptime_total = ordered_menus.reduce((n, {prep_time}) => n + prep_time, 0) + " Minuten";
-    create_new_order(order_id, order_menus, total_price, order_adress, preptime_total);
+    create_new_order(order_id, order_menus, total_price, order_adress, special_wish, preptime_total);
   };
 
 
@@ -201,5 +211,5 @@ calculate_button.addEventListener('click', get_menus); //Menus erfassen
 calculate_button.addEventListener('click', getDuration); //Berechnung der Lieferzeit
 view_button.addEventListener('click', get_menus); //Menus erfassen
 view_button.addEventListener('click', doSearch); //Bestellung anzeigen
-hide_button.addEventListener('click', HideDiv) //Bestellung ausblenden
+hide_button.addEventListener('click', HideDiv); //Bestellung ausblenden
 send_button.addEventListener('click', send_alert) //Bestellung absenden

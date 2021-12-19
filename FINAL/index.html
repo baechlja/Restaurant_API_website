@@ -144,7 +144,31 @@
       </div>
   </section>
 
-      
+  
+  <!--     reservation section 
+     <section class="section-reservation">
+      <div id="reservierung"></div>
+      <div class="reservierung-order">
+        <h3>
+          Reservierung
+        </h3>      
+<p>
+            <span>Bitte hinterlassen Sie Ihre Nummer, wir rufen Sie an, um eine Reservierung vorzunehmen.</span>
+        </p>
+        <input type="name" placeholder="Name eingeben"/>
+        <br/>
+        <br/>
+        <input type="datum" placeholder="Datum eingeben"/>
+        <br/>
+        <br/>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" placeholder="Rufnummer eingeben"/>
+        <br/> 
+        <br/> 
+        <button>Info Abschicken</button>
+      </div>
+    </section> -->
+   
+
     <!-- reservation section -->
     <section class="section-reservation">
       <div id="reservierung"></div>
@@ -155,8 +179,6 @@
 <p>
             <span>Bitte hinterlassen Sie Ihre Nummer, wir rufen Sie an, um eine Reservierung vorzunehmen.</span>
         </p>
-        <form class="container" method = "post" action="/">
-          <div class = "form-group">
             <input class = "form-control" name = "customername"  type="name" placeholder="Name eingeben"/>
             <br/>
             <br/>
@@ -208,7 +230,18 @@
             <input id = "other_check" class = "checked_menus" type="checkbox" value = "other"checked="checked"/>
         </label>
       </div>
-        <br/>
+    <br/>
+      <div id=dropdown>
+        <label> Wähle eine Lieferungsart </label>  
+          <select id = "trasport_modes">  
+          <option id = "drive_mode" value = "DRIVING"> Auto 
+          </option>  
+          <option id = "walk_mode" value = "WALKING"> Gehen 
+          </option>  
+          <option id = "bicycle_mode" value = "BICYCLING"> Fahrrad 
+          </option>    
+          </select>  
+      </div>
         <br/>
         <input id = "lieferadresse"type="text" placeholder="Lieferadresse eingeben"/>
       <!--Geben die aktuelle Uhrzeit oder die Zeit für eine zukünftige Bestellung an, berechnen die Lieferungsankommenzeit anhand der Fahrenzeit plus der Kochzeit-->
@@ -216,7 +249,7 @@
         <button id = "calculate_button">Lieferzeit berechnen</button>
         <br/>
         <br/>
-        <input type="text" placeholder="Sonderwüsche">
+        <input id= "wish" type="text" placeholder="Sonderwüsche">
         <br/>
         <br/>
         <div id= "bestellung" class = "bestellansicht">
@@ -258,9 +291,9 @@
       </div>
       </div>
       </section>
-
+      
       <script src="http://maps.googleapis.com/maps/api/js?key=ENTER_YOUR_API_KEY_HERE&libraries=places"></script>
-      <script src="script.js"></script>
       <script src="mongo_db.js"></script>
+      <script src="script.js"></script>
     </body>
   </html>
