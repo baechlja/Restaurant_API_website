@@ -26,3 +26,7 @@ Festures:
 * Responsive Design
   * Black mode/White mode
 
+#Anleitung
+1. Setzten Sie Ihren API key in die index.html Datei ein
+<script src="http://maps.googleapis.com/maps/api/js?key=ENTER_YOUR_API_KEY_HERE&libraries=places"></script>
+
