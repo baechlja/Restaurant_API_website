@@ -27,7 +27,7 @@ Features:
   * Dark mode/light mode
 
 # Aufbau der Website
-Die Website wurde mithilfe von Html und Css gebaut. In der Section "Reservierung" und "Lieferung" ist JavaScript implementiert.
+Die Website wurde mithilfe von HTML und CSS gebaut. In der Section "Reservierung" und "Lieferung" ist JavaScript implementiert. (in Folder FINAL)
 Bei der Reservierung werden die Daten in eine MongoDB Datenbank abgespeichert.
 Bei der Lieferung wird zum Einen die Lieferzeit mithilfe der Google Java Script API berechnet. Zum Anderen wird die Bestellung anhand der ausgewählten Kriterien erfasst und dargestellt.
 
